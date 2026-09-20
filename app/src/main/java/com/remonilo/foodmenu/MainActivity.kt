@@ -26,17 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.remonilo.foodmenu.ui.theme.FoodMenuTheme
 
-// 1. "Cetakan" data untuk satu menu makanan.
-//    Setiap MenuItem punya emoji, nama, deskripsi singkat, dan harga.
 data class MenuItem(
     val emoji: String,
     val name: String,
     val description: String,
     val price: String
 )
-
-// 2. Daftar menu masih statis (hardcode dulu), belum dari internet/database.
-//    Ini cukup untuk belajar dasar Compose: state, list, dan layout.
 val sampleMenu = listOf(
     MenuItem("🍔", "Burger Sapi", "Daging sapi, keju, selada segar", "Rp 25.000"),
     MenuItem("🍕", "Pizza Margherita", "Saus tomat, mozzarella, basil", "Rp 45.000"),
@@ -59,7 +54,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// 3. Layar utama: judul di atas (TopAppBar) + daftar menu (LazyColumn) di bawah.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodMenuApp() {
@@ -73,8 +67,6 @@ fun FoodMenuApp() {
             )
         }
     ) { innerPadding ->
-        // LazyColumn = versi "hemat" dari Column, hanya me-render item yang
-        // terlihat di layar. Cocok untuk daftar yang panjang seperti menu ini.
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -88,8 +80,6 @@ fun FoodMenuApp() {
     }
 }
 
-// 4. Satu "kartu" untuk menampilkan 1 item menu.
-//    Dipisah jadi Composable sendiri supaya mudah dibaca & dipakai ulang.
 @Composable
 fun MenuCard(menu: MenuItem) {
     Card(
@@ -102,7 +92,6 @@ fun MenuCard(menu: MenuItem) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Emoji dipakai sebagai "gambar" sederhana, tanpa perlu load dari internet.
             Text(
                 text = menu.emoji,
                 fontSize = 36.sp,
